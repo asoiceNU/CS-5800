@@ -25,7 +25,7 @@ using namespace std;
     unsigned int HashTable::hash(const string& word) {
         unsigned int hash_value = 0;
         for (char ch : word) {
-            hash_value = (hash_value * 31 + tolower(ch)) % size;
+            hash_value = (hash_value * 521 + tolower(ch)) % size;
         }
         return hash_value;
     }

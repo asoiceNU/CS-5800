@@ -50,7 +50,8 @@ int main() {
     ht.insert("awooooga");
     ht.deleteWord("alice");
     ht.find("the");
-    cout << "TEST";
+    cout << MAXHASH
+    cout << "TEST\n";
 
     return 0;
 }

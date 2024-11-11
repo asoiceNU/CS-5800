@@ -10,7 +10,7 @@
 #include <algorithm>
 using namespace std;
 
-#define MAXHASH 300  // Change this value to 30, 300, or 1000 based on test case
+#define MAXHASH 30  // Change this value to 30, 300, or 1000 based on test case
 
 struct Node {
     string word;
