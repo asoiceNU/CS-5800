@@ -57,13 +57,14 @@ using namespace std;
 
         while (current != nullptr) {
             if (current->word == word) {
-                cout << "Key count: " << current -> count << endl;
+                cout << word << " frequency: " << current -> count << endl;
                 return current->count;
             }
             current = current->next;
         }
+        cout << "Key Not Found \nKey count reset to: ";
         return -1;  // Word not found
-        cout << "Key Not Found";
+        
         
     }
 

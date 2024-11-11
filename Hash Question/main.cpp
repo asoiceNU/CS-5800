@@ -48,10 +48,15 @@ int main() {
     output_file.close();
 
     ht.insert("awooooga");
+
+    cout << ht.find("alice") <<"\n";
     ht.deleteWord("alice");
-    ht.find("the");
-    cout << MAXHASH
-    cout << "TEST\n";
+    cout << "After deletion: " << ht.find("alice") << "\n";
+    cout << "'find' returns -1 if the key is NIL\n";
+
+    cout << ht.find("the");
+    cout << "test";
+    
 
     return 0;
 }

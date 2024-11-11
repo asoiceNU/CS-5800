@@ -8,8 +8,12 @@ int main() {
 
     // Insert elements
     skipList.insert(3);
+    skipList.insert(3);
     skipList.insert(6);
     skipList.insert(7);
+
+    skipList.printList();
+
     skipList.insert(9);
     skipList.insert(12);
     skipList.insert(19);
@@ -30,6 +34,8 @@ int main() {
     skipList.deleteNode(6);
     std::cout << "Skip List after deleting 6:" << std::endl;
     skipList.printList();
+
+    skipList.search(50);
 
     return 0;
 }
