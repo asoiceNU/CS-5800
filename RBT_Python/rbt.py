@@ -271,8 +271,9 @@ class RedBlackTree:
         if node != self.TNULL:
             print(f"{indent}<{'R' if node.color == 'RED' else 'B'}> {node.data}")
             indent += "   " if last == 'updown' else "|  "
-            self.print_tree(node.left, indent, 'left')
             self.print_tree(node.right, indent, 'right')
+            self.print_tree(node.left, indent, 'left')
+            
 
 
 # Read values from a file and insert them into the tree

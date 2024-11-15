@@ -99,36 +99,16 @@ void BinomialHeap::consolidate() {
     }
 }
 
-// Helper function to print binomial heap (in order)
-void BinomialHeap::printHeap(BH_Node* root) {
-    if (!root) return;
-
-    BH_Node* current = root;
-    while (current) {
-        cout << current->key << " ";
-        printHeap(current->child);
-        current = current->sibling;
-    }
-}
-
-// Helper function to find a node by key (for Decrease Key and Delete)
-BH_Node* BinomialHeap::findNode(BH_Node* root, int key) {
-    if (!root) return nullptr;
-    if (root->key == key) return root;
-
-    BH_Node* res = findNode(root->child, key);
-    if (res) return res;
-
-    return findNode(root->sibling, key);
-}
-
-BinomialHeap::BinomialHeap() : head(nullptr) {}
-
+// Insert a new key into the heap
 void BinomialHeap::insert(int key) {
+    // Create a new node
     BH_Node* newNode = new BH_Node(key);
+    
+    // Merge the new node with the existing heap
     head = mergeHeaps(head, newNode);
 }
 
+// Extract the minimum key from the heap
 int BinomialHeap::extractMin() {
     if (!head) return INT_MIN;
 
@@ -167,6 +147,7 @@ int BinomialHeap::extractMin() {
     return minValue;
 }
 
+// Get the minimum key without removing it
 int BinomialHeap::getMin() {
     if (!head) return INT_MIN;
     BH_Node* curr = head;
@@ -180,40 +161,71 @@ int BinomialHeap::getMin() {
     return minVal;
 }
 
+// Union of two binomial heaps
 void BinomialHeap::unionHeaps(BinomialHeap& other) {
     head = mergeHeaps(head, other.head);
     other.head = nullptr;
     consolidate();
 }
 
+// Decrease the key of a node
 void BinomialHeap::decreaseKey(int oldKey, int newKey) {
     if (newKey > oldKey) {
-        cout << "New key is greater than the old key. Cannot decrease.\n";
+        std::cout << "New key is greater than the old key. Cannot decrease.\n";
         return;
     }
 
     BH_Node* node = findNode(head, oldKey);
     if (!node) {
-        cout << "Key not found!\n";
+        std::cout << "Key not found!\n";
         return;
     }
 
+    // Decrease the key
     node->key = newKey;
 
+    // Percolate up the tree to restore heap property
     BH_Node* parent = node->parent;
     while (parent && node->key < parent->key) {
-        swap(node->key, parent->key);
+        std::swap(node->key, parent->key);
         node = parent;
         parent = parent->parent;
     }
 }
 
+// Delete a key from the heap
 void BinomialHeap::deleteKey(int key) {
-    decreaseKey(key, INT_MIN);
-    extractMin();
+    decreaseKey(key, INT_MIN);  // Decrease the key to the smallest possible value
+    extractMin();  // Now extract the minimum (which is the deleted key)
 }
+
+// Helper function to print binomial heap (in order)
+void BinomialHeap::printHeap(BH_Node* root) {
+    if (!root) return;
+
+    BH_Node* current = root;
+
+    while (current) {
+        std::cout << current->key << " ";
+        printHeap(current->child);
+        current = current->sibling;
+    }
+}
+
+// Helper function to find a node by key (for Decrease Key and Delete)
+BH_Node* BinomialHeap::findNode(BH_Node* root, int key) {
+    if (!root) return nullptr;
+    if (root->key == key) return root;
+
+    BH_Node* res = findNode(root->child, key);
+    if (res) return res;
+
+    return findNode(root->sibling, key);
+}
+
+BinomialHeap::BinomialHeap() : head(nullptr) {}
 
 void BinomialHeap::print() {
     printHeap(head);
-    cout << endl;
+    std::cout << std::endl;
 }
